@@ -52,22 +52,44 @@ The pooling layer can be though of as a down-sampling layer; it reduces the numb
 This is the final layer in a "connected" network model. Its task is to produce a probabilistic classification (0 or 1) based on the features extracted from the previous layers and their filters. Generally, this layer uses the softmax activation function (vs the ReLU).
 
 ![Example CNN](writeup/cnn_illustration.png)
+
 [Image Credit](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fuser-images.githubusercontent.com%2F57826388%2F73771230-50517f80-47c1-11ea-9430-785c53e2e3cf.png&f=1&nofb=1&ipt=b23b401bcd740c758a75f6d5f4224989be625165365b2c43c1dde5fca590bd9d&ipo=images)
 
-#### Project Overview
+### Project Overview
 
 This project provides a glimpse into CNNs for classifying images. Four models were use: a base model to establish a rudementary benchmark and 3 hand-coded representations of LeNet15, AlexNet and VGGNet16. 
 
-##### Data
+#### Data
 
 The CIFAR10 dataset (50,000 images 32x32 pixels containing 10 categories) was used to train the base and LeNet15 models. The Oxford University's flower dataset was used for AlexNet and VGGNet16 (3,670 227x277 pixels containing 5 categories). This data was used without the need for cleaning thanks to the authors.
 
-##### CNN Models
+#### CNN Models
 
 Besides the base model, the remaining three models were fitted "as is" followed by adding image augmentation layers, ending with the image augmentation accompanied by a "dropout" layer. Therefore, LeNet15, AlexNet and VGGNet16 architectures were ran three times each.
 
-##### Metrics
+#### Metrics
 
 After each iteration, a model's accuracy, validation accuracy, loss, and validation loss were plotted (below). Furthermore, each model also generated metrics for binary accuracy, categorical accuracy and categorical crossentropy. "Accuracy" was selected (vs. precision for example) as the primary metric of interest since its importance in correctly identifying (classifying) and image. However, "categorical accuracy" is also important since the loss function for all models is "categorical crossentropy". These metrics are included in tabular for below.
 
+### Comparison of Four CNN Models
 
+#### Base Model
+
+The base model was created using the Keras CIFAR10 classification [example](https://ermlab.com/en/blog/nlp/cifar-10-classification-using-keras-tutorial/)
+
+![](writeup/base_model_architecture.png)
+
+Its 6 convolution layers start with a 32x32x3 (the last being RGB) matrix inputs. Dropout (random omission of features) is set to 20% and several max-pooling layers are interwoven. The network ends at a 'dense' layer with a softmax activation.
+
+Below are the model's accuracy and loss plots:
+![](writeup/base_model/base_accuracy_loss.png)
+
+The accuracy plot ilustrates that the base model trained fairly well within the first 10 epochs around which time the validation scores began to decrease, suggesting overfitting. The loss plot shows a good learning rate reached within the same time persiod when it started to increase; supported by the validation loss. The repetitive, step-like progression on both graphs suggest that the input data may contain repetitive features. Taking into account that the input data is very small (32x32) pixels, it would be difficult for the human eye to distinguish images.
+
+![](writeup/base_model/base_metrics_df.png)
+
+An image of an airplane was used (scaled to the correct input size) in a distinct prediction and inspite of the model's poor performance metrics, it made the correct prediction.
+
+![](writeup/airplane_test_img_small.jpeg)
+
+![](writeup/base_model/base_airplane_prediction.png)
