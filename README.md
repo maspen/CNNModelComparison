@@ -158,7 +158,7 @@ These two plots display a very strong overfitting probably due to the small data
 
 Like before, a distinct image of a rose was used for the model to predict
 
-![](writeup/rose_test_img.jpeg)
+![](writeup/rose_test_img_small.jpeg)
 
 And the model made the correct prediction
 
