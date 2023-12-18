@@ -77,19 +77,65 @@ After each iteration, a model's accuracy, validation accuracy, loss, and validat
 
 The base model was created using the Keras CIFAR10 classification [example](https://ermlab.com/en/blog/nlp/cifar-10-classification-using-keras-tutorial/)
 
-![](writeup/base_model_architecture.png)
+![](writeup/base_model/base_model_architecture.png)
 
-Its 6 convolution layers start with a 32x32x3 (the last being RGB) matrix inputs. Dropout (random omission of features) is set to 20% and several max-pooling layers are interwoven. The network ends at a 'dense' layer with a softmax activation.
+Its 6 convolution layers start with a 32x32x3 (the last being RGB) matrix inputs. It has a very "dense" (1024) layer before a "dropout" (random omission of features) layer set to 20% and several max-pooling layers are interwoven. The network ends at a 'dense' layer with a softmax activation.
 
 Below are the model's accuracy and loss plots:
 ![](writeup/base_model/base_accuracy_loss.png)
 
-The accuracy plot ilustrates that the base model trained fairly well within the first 10 epochs around which time the validation scores began to decrease, suggesting overfitting. The loss plot shows a good learning rate reached within the same time persiod when it started to increase; supported by the validation loss. The repetitive, step-like progression on both graphs suggest that the input data may contain repetitive features. Taking into account that the input data is very small (32x32) pixels, it would be difficult for the human eye to distinguish images.
+The accuracy plot ilustrates that the base model trained fairly well within the first 10 epochs around which time the validation scores began to decrease, suggesting overfitting. The loss plot shows a good learning rate reached within the same time persiod when it started to increase; supported by the validation loss. The repetitive, step-like progression on both graphs suggest that the input data may contain repetitive features. Taking into account that the input data is very small (32x32) pixels, it would be difficult for the human eye to distinguish between images.
 
 ![](writeup/base_model/base_metrics_df.png)
 
-An image of an airplane was used (scaled to the correct input size) in a distinct prediction and inspite of the model's poor performance metrics, it made the correct prediction.
+An image of an airplane was used (scaled to the correct input size) in a distinct prediction and inspite of the model's poor performance metrics (loss: 88%, accuracy: 70%), it made the correct prediction.
 
 ![](writeup/airplane_test_img_small.jpeg)
 
 ![](writeup/base_model/base_airplane_prediction.png)
+
+#### LeNet5 Model
+
+The LeNet5 model was constructed via the Kaggle [example](https://www.kaggle.com/code/blurredmachine/lenet-architecture-a-complete-guide) and uses the same CIFAR10 data as the base model.
+
+![](writeup/lenet5_model/lenet5_model_architecture.png)
+
+This is a simpler model than the base, containing only two convolution layers. There are no "drouput" layers in this model but the last three dense layers titrate from 120 to 84 to 10 and finally to the output layer with a softmax activation.
+
+![](writeup/lenet5_model/lenet5_accuracy_loss.png)
+
+In comparison to the base model, the LeNet5 model trained better over the span of 50 epochs, but suffered in-accuracy (59%) and validation losses very early on in training.
+
+![](writeup/lenet5_model/lenet5_airplane_prediction.png)
+
+"Out of the box", this model identified the airplane image mentioned above to a dog.
+
+#### LeNet5 Model with Image Augmentation
+
+The above model was ammended by introducing image augmentation
+```
+RandomFlip("horizontal", input_shape=(32, 32, 3))
+RandomRotation(0.1)
+RandomZoom(0.1)
+```
+as the first three layers. The resulting validation plots
+
+![](writeup/lenet5_model/lenet5_aug_accuracy_loss.png)
+
+show the same learning rate as the previous iteration. It is interesting to see that the validation accuracy and loss adhere much closer to the training rate but exhibit repetitive steps suggesting a learning rate (0.01) that overshoots the target.
+
+In spite of its poor performance (accuracy:59%), this model made the correct prediction:
+
+![](writeup/lenet5_model/lenet5_aug_airplane_prediction.png)
+
+#### LeNet5 Model with Image Augmentation and Dropout
+
+This model was copied from the above and ammended with
+```
+Dropout(0.2)
+```
+preceding the `Flatten` layer.
+
+![](writeup/lenet5_model/lenet5_aug_dropout_accuracy_loss.png)
+
+Although accuracy (59%) remained similar to it predicessor, the accuracy and loss validations, depart from the training rate which is also lower than in the earlier models. This is a bit surprisong since the training set contained 153,600,000 images. When the data was initially split into training & testing sets, it was not shuffled; if the data was not well distributed, this could suggest the lack of "randomness" necessary for the `Dropout` to be of benefit.
