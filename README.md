@@ -139,3 +139,55 @@ preceding the `Flatten` layer.
 ![](writeup/lenet5_model/lenet5_aug_dropout_accuracy_loss.png)
 
 Although accuracy (59%) remained similar to it predicessor, the accuracy and loss validations, depart from the training rate which is also lower than in the earlier models. This is a bit surprisong since the training set contained 153,600,000 images. When the data was initially split into training & testing sets, it was not shuffled; if the data was not well distributed, this could suggest the lack of "randomness" necessary for the `Dropout` to be of benefit.
+
+This table summarizes the scores collected for the three variants of LeNet5
+
+![](writeup/lenet5_model/lenet5_metrics_df.png)
+
+#### AlexNet Model
+
+This AlexNet model was constructed via the Kaggle [example](https://www.kaggle.com/code/blurredmachine/alexnet-architecture-a-complete-guide)
+
+![](writeup/alexnet_model/alexnet_architecture.png)
+
+Like the up-coming VGGNet16 model, this model uses the Oxford University flower dataset. The image input size is now 227x227x3, however, there are only 3,670 samples in 5 categories (daisy, dandelion, roses, sunflowers, tulips). It contains 4 convolution layers followed by an interesting pair of `Dense` layers of size 4,096. Again, the last `Dense` layer uses the softmax activation.
+
+![](writeup/alexnet_model/alexnet_accuracy_loss.png)
+
+These two plots display a very strong overfitting probably due to the small dataset size (validation size is 1,101 sample) in spite of a reasonable, yet uncertain, learning rate.
+
+Like before, a distinct image of a rose was used for the model to predict
+
+![](writeup/rose_test_img.jpeg)
+
+And the model made the correct prediction
+
+![](writeup/alexnet_model/alexnet_rose_prediction.png)
+
+#### AlexNet Model with Image Augmentation
+
+As before, the original model was ammended with image manipulation at the bottom of the network.
+
+![](writeup/alexnet_model/alexnet_aug_accuracy_loss.png)
+
+Compared to its predicessor, this model makes an effort to improves accuracy and decrease loss; both progressions attempt to get closer to the training rate. The training rate is more gradual yet more uncertain starting around the tenth epoch. The accuracy improvement (from 71% in the above model to 74%) is encouraging. However, when the distinct rose image is used to make a prediction
+
+![](writeup/alexnet_model/alexnet_aug_rose_prediction.png)
+
+this model thinks its looking at a tulip.
+
+#### AlexNet Model with Image Augmentation and Dropout
+
+The final augmentation to the AlexModel is the addition of `Dropout`.
+
+![](writeup/alexnet_model/alexnet_aug_dropout_accuracy_loss.png)
+
+The loss metrics appear less sporadic, with fewer jagged steps. The accuracy score of 75% hints of a better prediction of the rose image
+
+![](writeup/alexnet_model/alexnet_aug_dropout_rose_prediction.png)
+
+Indeed, the `Dropout` has improved the prediction, yet still hinting at a ~15% presence of "tulips" in the image.
+
+The table below summarizes the metrics for the three AlexNet variants described above:
+
+![](writeup/alexnet_model/alexnet_metrics_df.png)
