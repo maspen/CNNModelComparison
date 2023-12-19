@@ -6,11 +6,11 @@
 
 #### Business Understanding
 
-Computer vision was the harbinger and beneficiary of deep learning. We interact with deep vision models without realizing it. Google Photos, OCR applications, security systems, and many more utilize this technology. These models are also used in robotics, autonomous vehicles and even farming. Its rise between 2011 and 2015 was demarked by the winning of the ImageNet challenge in 2012 and deep learning was widely adoted in 2016.
+Computer vision was the harbinger and beneficiary of deep learning. We interact with deep vision models without realizing it. Google Photos, OCR applications, security systems, and many more utilize this technology. These models are also used in robotics, autonomous vehicles and even farming. Its rise between 2011 and 2015 was demarcated by the winning of the ImageNet challenge in 2012 and deep learning was widely adopted in 2016.
 
 #### Why CNNs?
 
-This project is a precursor to future work involving generative AI (GenAI) in the context of image generation. The need to correctly classify images is also essential in generative adverserial networks (GANs) where two "competing" networks are used. Understanding the advantages, disadvantages and limitations of existing models will facilitate correct model selection and a deeper understanding of optimal configuration.
+This project is a precursor to future work involving generative AI (GenAI) in the context of image generation. The need to correctly classify images is also essential in generative adversarial networks (GANs) where two "competing" networks are used. Understanding the advantages, disadvantages and limitations of existing models will facilitate correct model selection and a deeper understanding of optimal configuration.
 
 #### How CNNs Work
 
@@ -24,17 +24,17 @@ The convolution layer is the first layer. It can be followed by subsequent convo
 
 ##### The Convolution Layer
 
-This is the fundamental layer of the CNN and it is here that most of the computation occurs. Its components include the input image, a feature map and a filter. The input image is a matrix representation containing the pixel values. If the input image is color, this is a 3x3 matrix of width and height corresponding to the image dimensions plus a third dimension representing each pixel's color (eg. RGB). The filter (also called a kernel of feature detector). It traverses the image to determine if a feature is present. This process is what gives this layer its name: convolution.
+This is the fundamental layer of the CNN and it is here that most of the computation occurs. Its components include the input image, a feature map and a filter. The input image is a matrix representation containing the pixel values. If the input image is color, this is a 3x3 matrix of width and height corresponding to the image dimensions plus a third dimension representing each pixel's color (eg. RGB). The filter (also called a kernel of feature detector) traverses the image to determine if a feature is present. This process is what gives this layer its name: convolution.
 
-The filter is a two-dimensional array of weights representing a portion of the image; typically a matrix of size 3x3. This filter is applied to part of the image and the dot product of the area "under" the filter is calculated and fed into an output array. The filter then shifts (via a parametrized "stride") to a different part of the image and the process is repeated for the whole image. The result is a feature map (also known as a convoluted feature or activation map). The filter weights remain fixed as it traverses the image. During backpropagation and gradient descent, these weights can be adjusted as the model trains on the dataset.
+The filter is a two-dimensional array of weights representing a portion of the image; typically a matrix of size 3x3. This filter is applied to part of the image and the dot product of the area "under" the filter is calculated and fed into an output array. The filter then shifts (via a parametrized "stride") to a different part of the image and the process is repeated for the whole image. The result is a feature map (also known as a convoluted feature or activation map). The filter weights remain fixed as it traverses the image. During back-propagation and gradient descent, these weights can be adjusted as the model trains on the dataset.
 
-![Convoltion](writeup/05_convolutions_example.gif)
+![Convolution](writeup/05_convolutions_example.gif)
 Image credit [Illarion Khlestov](https://ikhlestov.github.io/)
 
 There are also three important hyperparameters that need to be set before training a model that affect its output:
 
 - The number of filters: affect the depth of the output
-- Strinde: mentioned above, determines the number of pixels the filter moves across the image at each iteration (see animation above)
+- Stride: mentioned above, determines the number of pixels the filter moves across the image at each iteration (see animation above)
 - Padding: used when the filter (and its strides) does not fit the image
 
 After the convolution completes, a Rectified Linear Unit (ReLU) is applied to the filter which introduces non-linearity to the CNN model.
@@ -43,7 +43,7 @@ Convolution layers are generally layered. One can think of this progression as c
 
 ##### Pooling Layer
 
-The pooling layer can be though of as a down-sampling layer; it reduces the number of parameters from the input. Like the convolution layer, the pooling layer also travers the entire image using a filter. This time, however, the filter does not have any weights. An aggregation function is used instead. There are two types of pooling layers: max pooling (selects the pixels with the maximum value & passes these to the output array), average pooling (calculates the averate pixel value & passes these to the output array)
+The pooling layer can be though of as a down-sampling layer; it reduces the number of parameters from the input. Like the convolution layer, the pooling layer also travers the entire image using a filter. This time, however, the filter does not have any weights. An aggregation function is used instead. There are two types of pooling layers: max pooling (selects the pixels with the maximum value & passes these to the output array), average pooling (calculates the average pixel value & passes these to the output array)
 
 ##### Fully-connected (FC) Layer
 
@@ -55,7 +55,7 @@ This is the final layer in a "connected" network model. Its task is to produce a
 
 ### Project Overview
 
-This project provides a glimpse into CNNs for classifying images. Four models were use: a base model to establish a rudementary benchmark and 3 hand-coded representations of LeNet15, AlexNet and VGGNet16. 
+This project provides a glimpse into CNNs for classifying images. Four models were use: a base model to establish a rudimentary benchmark and 3 hand-coded representations of LeNet15, AlexNet and VGGNet16. 
 
 #### Data
 
@@ -63,11 +63,11 @@ The CIFAR10 dataset (50,000 images 32x32 pixels containing 10 categories) was us
 
 #### CNN Models
 
-Besides the base model, the remaining three models were fitted "as is" followed by adding image augmentation layers, ending with the image augmentation accompanied by a `Dropout` layer. Therefore, LeNet15, AlexNet and VGGNet16 architectures were ran three times each.
+Besides the base model, the remaining three models were fitted "as is" followed by adding image augmentation layers, ending with the image augmentation accompanied by a `Dropout` layer. Therefore, LeNet15, AlexNet and VGGNet16 architectures were ran three times each. All models were fitted over fifty epochs.
 
 #### Metrics
 
-After each iteration, a model's accuracy, validation accuracy, loss, and validation loss were plotted. Furthermore, each model also generated metrics for binary accuracy, categorical accuracy and categorical crossentropy. "Accuracy" was selected (vs. precision for example) as the primary metric of interest since its importance in correctly identifying (classifying) and image. However, "categorical accuracy" is also important since the loss function for all models is "categorical crossentropy". These metrics are included in tabular form below.
+After each iteration, a model's accuracy, validation accuracy, loss, and validation loss were plotted. Furthermore, each model also generated metrics for binary accuracy, categorical accuracy and categorical cross-entropy. "Accuracy" was selected (vs. precision for example) as the primary metric of interest since its importance in correctly identifying (classifying) and image. However, "categorical accuracy" is also important since the loss function for all models is "categorical crossentropy". These metrics are included in tabular form below.
 
 ### Comparison of Four CNN Models
 
@@ -82,11 +82,11 @@ Its 6 convolution layers start with a 32x32x3 (the last being RGB) matrix inputs
 Below are the model's accuracy and loss plots:
 ![](writeup/base_model/base_accuracy_loss.png)
 
-The accuracy plot ilustrates that the base model trained fairly well within the first 10 epochs around which time the validation scores began to decrease, suggesting overfitting. The loss plot shows a good learning rate reached within the same time persiod when it started to increase; supported by the validation loss. The repetitive, step-like progression on both graphs suggest that the input data may contain repetitive features. Taking into account that the input data is very small (32x32) pixels, it would be difficult for the human eye to distinguish between images.
+The accuracy plot illustrates that the base model trained fairly well within the first 10 epochs around which time the validation scores began to decrease, suggesting overfitting. The loss plot shows a good learning rate reached within the same time period when it started to increase; supported by the validation loss. The repetitive, step-like progression on both graphs suggest that the input data may contain repetitive features. Taking into account that the input data is very small (32x32) pixels, it would be difficult for the human eye to distinguish between images.
 
 ![](writeup/base_model/base_metrics_df.png)
 
-An image of an airplane was used (scaled to the correct input size) in a distinct prediction and inspite of the model's poor performance metrics (loss: 88%, accuracy: 70%), it made the correct prediction.
+An image of an airplane was used (scaled to the correct input size) in a distinct prediction and in spite of the model's poor performance metrics (loss: 88%, accuracy: 70%), it made the correct prediction.
 
 ![](writeup/airplane_test_img_small.jpeg)
 
@@ -110,7 +110,7 @@ In comparison to the base model, the LeNet5 model trained better over the span o
 
 #### LeNet5 Model with Image Augmentation
 
-The above model was ammended by introducing image augmentation
+The above model was amended by introducing image augmentation
 ```
 RandomFlip("horizontal", input_shape=(32, 32, 3))
 RandomRotation(0.1)
@@ -208,21 +208,21 @@ The image-augmented version of the VGGNet16 model displayed an improved training
 
 ![](writeup/vggnet16/vggnet16_aug_accuracy_loss.png)
 
-The prediction, however was similar to the AlexNet + image augmentation + Dropout, favoring more the "tulips".
+The prediction, however was similar to the AlexNet + image augmentation + Dropout, favoring the "tulips" more.
 
 ![](writeup/vggnet16/vggnet16_aug_rose_prediction.png)
 
 #### VGGNet16 Model with Image Augmentation and Dropout
 
-The final model in this comparison adds `Dropout` to its predicessor.
+The final model in this comparison adds `Dropout` to its predecessor.
 
 ![](writeup/vggnet16/vggnet16_aug_dropout_accuracy_loss.png)
 
-There are subtle improvements in the training accuracy and validation loss. Both seems to near their training counterparts and the curves are less sporradic.
+There are subtle improvements in the training accuracy and validation loss. Both seems to near their training counterparts and the curves are less sporadic.
 
 ![](writeup/vggnet16/vggnet16_aug_dropout_rose_prediction.png)
 
-We can see an improvement in the rose prediction where the "tulips" misclassification drops to around 30%; vs the non-drouput variant of ~45%. "dandelion" is also introduced, which is interesting how a completely different-looking "flower" structure could be confused with that of a rose.
+We can see an improvement in the rose prediction where the "tulips" misclassification drops to around 30%; vs the non-dropout variant of ~45%. "dandelion" is also introduced, which is interesting how a completely different-looking "flower" structure could be confused with that of a rose.
 
 Below is a summary of the VGGNet 16 metrics collected in this model's comparison:
 
@@ -230,7 +230,7 @@ Below is a summary of the VGGNet 16 metrics collected in this model's comparison
 
 #### Model Fit Times
 
-These models were ran on a 2021 MacBookPro with a M1 Max processor (8 cores). Attempts were made to leverage GPU/TPU resources via Google Colab, but the length of time it took for these models to run, forced sessions to expire.
+These models were ran on a 2021 MacBookPro with a M1 Max processor (8 cores). Attempts were made to leverage GPU/TPU resources via Google Colab, but the length of time it took for these models to run, forced sessions to time out and disconnect.
 Below is a plot of the fit times
 
 ![](writeup/model_fit_times.png)
@@ -239,11 +239,22 @@ Note that the "VGGNet16 Model with Image Augmentation" is probably an anomaly du
 
 #### Conclusion
 
-This project illustrates that producing accurate and performant CNNs for image classification is not a trivial task. Architectures that are commonly available in frameworks like Keras still require careful selection and the optimization of hyperparameters. Input data is a crucial precursor, both in quality and quantity. Comptational power for larger models is necessary to reduce training time.
+This project illustrates that producing accurate and performant CNNs for image classification is not a trivial task. Architectures that are commonly available in frameworks like Keras still require careful selection and the optimization of hyper-parameters. Input data is a crucial precursor, both in quality and quantity. Computational power for larger models is necessary to reduce training time.
 
 #### Future Work
 
 The VGGNet 16 model trained in around eight hours with marginal results for all three variants. It is necessary to compare performance of any of these models utilizing `GridSearchCV`, for example. Selecting ranges of epochs, optimizers (`Adam`, `SGD` etc.), learning rate, momentum, network weight initialization, neuron activation functions, dropout regularization, and the number of neurons in hidden layers. To reduce training time, parallelizing this process using AWS instances. 
+
+#### Files
+
+*  [Base Model](BaseModel.ipynb)
+*  [AlexNet](AlexNet.ipynb)
+*  [LeNet5](LeNet5.ipynb)
+*  [VGGNet16](VGGNet16.ipynb)
+
+#### Running the Examples
+
+All of the models were created as Jupyter notebooks. They can be ran locally in Anaconda or imported into Google Colab (I mentioned earlier some limitations due to long-running fit/train).
 
 #### References
 
@@ -267,14 +278,3 @@ The VGGNet 16 model trained in around eight hours with marginal results for all 
 * [Transfer Learning in Action: From ImageNet to Tiny-ImageNet](https://towardsdatascience.com/transfer-learning-in-action-from-imagenet-to-tiny-imagenet-b96fe3aa5973)
 * [Manning, Ch 6: Teaching Machines to See](https://github.com/thushv89/manning_tf2_in_action/blob/0e8080fe7eaae90f3afe73bde3822b2a68dc90f5/Ch06-Image-Classification-with-CNNs/6.1.Image_Classification.ipynb)
 * [PyTorch Ignite Tutorial— Classifying Tiny ImageNet with EfficientNet](https://towardsdatascience.com/pytorch-ignite-classifying-tiny-imagenet-with-efficientnet-e5b1768e5e8f)
-
-#### Files
-
-*  [Base Model](BaseModel.ipynb)
-*  [AlexNet](AlexNet.ipynb)
-*  [LeNet5](LeNet5.ipynb)
-*  [VGGNet16](VGGNet16.ipynb)
-
-#### Running the Examples
-
-All of the models were created as Jupyter notebooks. They can be ran locally in Anaconda or imported into Google Colab (I mentioned earlier some limmitations due to long-running fit/training).
