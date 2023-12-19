@@ -236,7 +236,8 @@ Below is a summary of the VGGNet 16 metrics collected in this model's comparison
 
 #### Model Fit Times
 
-These models were ran on a 2021 MacBookPro with a M1 Max processor (8 cores). Below is a plot of the fit times
+These models were ran on a 2021 MacBookPro with a M1 Max processor (8 cores). Attempts were made to leverage GPU/TPU resources via Google Colab, but the length of time it took for these models to run, forced sessions to expire.
+Below is a plot of the fit times
 
 ![](writeup/model_fit_times.png)
 
