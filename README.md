@@ -191,3 +191,65 @@ Indeed, the `Dropout` has improved the prediction, yet still hinting at a ~15% p
 The table below summarizes the metrics for the three AlexNet variants described above:
 
 ![](writeup/alexnet_model/alexnet_metrics_df.png)
+
+#### VGGNet16 Model
+
+The final and most ambitions model used is the VGGNet 16 model. The "16" layer version was selected since it resides in the middle of VGGNet models in respect to complexity. This model was constructed using Kaggle [example](https://www.kaggle.com/code/blurredmachine/vggnet-16-architecture-a-complete-guide).
+
+This model is comprised of 13 convolution layers and takes 224x224 images as input (vs the 227x227 needed for AlexNet). The same "flowers" dataset was used as for AlexNet.
+
+![](writeup/vggnet16/vggnet16_architecture.png)
+
+The accuracy validation plot show very strong overfitting. The validation loss is the highest from all of the previous models, again, suggesting that the dataset for this complex model was insufficient.
+
+![](writeup/vggnet16/vggnet16_accuracy_loss.png)
+
+Surprisingly, however, this model made the correct "rose" prediction
+
+![](writeup/vggnet16/vggnet16_rose_prediction.png)
+
+#### VGGNet16 Model with Image Augmentation
+
+The image-augmented version of the VGGNet16 model displayed an improved training accuracy trend; although with more uncertainty. Still overfitted, but less so than its non-augmented counterpart, the validation lossdecreased substantially.
+
+![](writeup/vggnet16/vggnet16_aug_accuracy_loss.png)
+
+The prediction, however was similar to the AlexNet + image augmentation +`Dropout`, favoring more the "tulips".
+
+![](writeup/vggnet16/vggnet16_aug_rose_prediction.png)
+
+#### VGGNet16 Model with Image Augmentation and Dropout
+
+The final model in this comparison adds `Dropout` to its predicessor.
+
+![](writeup/vggnet16/vggnet16_aug_dropout_accuracy_loss.png)
+
+There are subtle improvements in the training accuracy and validation loss. Both seems to near their training counterparts and the curves are less sporradic.
+
+![](writeup/vggnet16/vggnet16_aug_dropout_rose_prediction.png)
+
+We can see an improvement in the rose prediction where the "tulips" misclassification drops to around 30%; vs the non-drouput variant of ~45%.
+
+Below is a summary of the VGGNet 16 metrics collected in this model's comparison:
+
+![](writeup/vggnet16/vggnet16_metrics_df.png)
+
+#### Model Fit Times
+
+These models were ran on a 2021 MacBookPro with a M1 Max processor (8 cores). Below is a plot of the fit times
+
+![](model_fit_times.png)
+
+Note that the "VGGNet16 Model with Image Augmentation" is probably an anomaly due to the machine going to "sleep". In spite of this, it is clear that the most complex model, VGGNet 16, took an overwhelmingly longer time to fit than the other models.
+
+#### Conclusiong
+
+TODO
+
+#### Future Work
+
+TODO
+
+#### References
+
+TODO
