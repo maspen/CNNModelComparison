@@ -228,7 +228,7 @@ There are subtle improvements in the training accuracy and validation loss. Both
 
 ![](writeup/vggnet16/vggnet16_aug_dropout_rose_prediction.png)
 
-We can see an improvement in the rose prediction where the "tulips" misclassification drops to around 30%; vs the non-drouput variant of ~45%.
+We can see an improvement in the rose prediction where the "tulips" misclassification drops to around 30%; vs the non-drouput variant of ~45%. "dandelion" is also introduced, which is interesting how a completely different-looking "flower" structure could be confused with that of a rose.
 
 Below is a summary of the VGGNet 16 metrics collected in this model's comparison:
 
