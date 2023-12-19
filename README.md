@@ -238,7 +238,7 @@ Below is a summary of the VGGNet 16 metrics collected in this model's comparison
 
 These models were ran on a 2021 MacBookPro with a M1 Max processor (8 cores). Below is a plot of the fit times
 
-![](model_fit_times.png)
+![](writeup/model_fit_times.png)
 
 Note that the "VGGNet16 Model with Image Augmentation" is probably an anomaly due to the machine going to "sleep". In spite of this, it is clear that the most complex model, VGGNet 16, took an overwhelmingly longer time to fit than the other models.
 
@@ -251,5 +251,13 @@ TODO
 TODO
 
 #### References
+
+TODO
+
+#### Files
+
+TODO
+
+#### Running the Examples
 
 TODO
