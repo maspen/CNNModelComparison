@@ -1,12 +1,10 @@
-<center>
-    <center>
-        <img src=writeup/cnn_architecture.jpg/>
-    </center>
-</center>
+### Deep Learning with Convolutional Neural Networks (CNNs)
 
-### Business Understanding
+<p align="center">
+  <img src=writeup/cnn_architecture.jpg/>
+</p>
 
-#### Deep Learning with Convolutional Neural Networks (CNNs)
+#### Business Understanding
 
 Computer vision was the harbinger and beneficiary of deep learning. We interact with deep vision models without realizing it. Google Photos, OCR applications, security systems, and many more utilize this technology. These models are also used in robotics, autonomous vehicles and even farming. Its rise between 2011 and 2015 was demarked by the winning of the ImageNet challenge in 2012 and deep learning was widely adoted in 2016.
 
