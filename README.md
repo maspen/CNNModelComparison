@@ -16,7 +16,7 @@ This project is a precursor to future work involving generative AI (GenAI) in th
 
 CNNs are composed from three main types of layers:
 
-- Convolutions
+- Convolution
 - Pooling
 - Fully-connected (FC)
 
@@ -24,7 +24,7 @@ The convolution layer is the first layer. It can be followed by subsequent convo
 
 ##### The Convolution Layer
 
-This is the fundamental layer of the CNN and it is here that most of the computation occurs. Its components include the input image, a feature map and a filter. The input image is a matrix representation containing the pixel values. If the input image is color, this is a 3x3 matrix of width and height corresponding to the image dimensions. The filter (also called a kernel of feature detector). It traverses the image to determine if a feature is present. This process is what gives this layer its name: convolution.
+This is the fundamental layer of the CNN and it is here that most of the computation occurs. Its components include the input image, a feature map and a filter. The input image is a matrix representation containing the pixel values. If the input image is color, this is a 3x3 matrix of width and height corresponding to the image dimensions plus a third dimension representing each pixel's color (eg. RGB). The filter (also called a kernel of feature detector). It traverses the image to determine if a feature is present. This process is what gives this layer its name: convolution.
 
 The filter is a two-dimensional array of weights representing a portion of the image; typically a matrix of size 3x3. This filter is applied to part of the image and the dot product of the area "under" the filter is calculated and fed into an output array. The filter then shifts (via a parametrized "stride") to a different part of the image and the process is repeated for the whole image. The result is a feature map (also known as a convoluted feature or activation map). The filter weights remain fixed as it traverses the image. During backpropagation and gradient descent, these weights can be adjusted as the model trains on the dataset.
 
@@ -34,7 +34,7 @@ Image credit [Illarion Khlestov](https://ikhlestov.github.io/)
 There are also three important hyperparameters that need to be set before training a model that affect its output:
 
 - The number of filters: affect the depth of the output
-- Strinde: mentioned above, determines the number of pixels the filter moves across the image
+- Strinde: mentioned above, determines the number of pixels the filter moves across the image at each iteration (see animation above)
 - Padding: used when the filter (and its strides) does not fit the image
 
 After the convolution completes, a Rectified Linear Unit (ReLU) is applied to the filter which introduces non-linearity to the CNN model.
@@ -43,7 +43,7 @@ Convolution layers are generally layered. One can think of this progression as c
 
 ##### Pooling Layer
 
-The pooling layer can be though of as a down-sampling layer; it reduces the number of parameters from the input. Like the concolution layer, the pooling layer also travers the entire image using a filter. This time, however, the filter does not have any weights. An aggregation function is used instead. There are two types of pooling layers: max pooling (selects the pixels with the maximum value & passes these to the output array), average pooling (calculates the averate pixel value & passes these to the output array)
+The pooling layer can be though of as a down-sampling layer; it reduces the number of parameters from the input. Like the convolution layer, the pooling layer also travers the entire image using a filter. This time, however, the filter does not have any weights. An aggregation function is used instead. There are two types of pooling layers: max pooling (selects the pixels with the maximum value & passes these to the output array), average pooling (calculates the averate pixel value & passes these to the output array)
 
 ##### Fully-connected (FC) Layer
 
@@ -63,11 +63,11 @@ The CIFAR10 dataset (50,000 images 32x32 pixels containing 10 categories) was us
 
 #### CNN Models
 
-Besides the base model, the remaining three models were fitted "as is" followed by adding image augmentation layers, ending with the image augmentation accompanied by a "dropout" layer. Therefore, LeNet15, AlexNet and VGGNet16 architectures were ran three times each.
+Besides the base model, the remaining three models were fitted "as is" followed by adding image augmentation layers, ending with the image augmentation accompanied by a `Dropout` layer. Therefore, LeNet15, AlexNet and VGGNet16 architectures were ran three times each.
 
 #### Metrics
 
-After each iteration, a model's accuracy, validation accuracy, loss, and validation loss were plotted (below). Furthermore, each model also generated metrics for binary accuracy, categorical accuracy and categorical crossentropy. "Accuracy" was selected (vs. precision for example) as the primary metric of interest since its importance in correctly identifying (classifying) and image. However, "categorical accuracy" is also important since the loss function for all models is "categorical crossentropy". These metrics are included in tabular for below.
+After each iteration, a model's accuracy, validation accuracy, loss, and validation loss were plotted. Furthermore, each model also generated metrics for binary accuracy, categorical accuracy and categorical crossentropy. "Accuracy" was selected (vs. precision for example) as the primary metric of interest since its importance in correctly identifying (classifying) and image. However, "categorical accuracy" is also important since the loss function for all models is "categorical crossentropy". These metrics are included in tabular form below.
 
 ### Comparison of Four CNN Models
 
@@ -77,7 +77,7 @@ The base model was created using the Keras CIFAR10 classification [example](http
 
 ![](writeup/base_model/base_model_architecture.png)
 
-Its 6 convolution layers start with a 32x32x3 (the last being RGB) matrix inputs. It has a very "dense" (1024) layer before a "dropout" (random omission of features) layer set to 20% and several max-pooling layers are interwoven. The network ends at a 'dense' layer with a softmax activation.
+Its 6 convolution layers start with a 32x32x3 (the last being RGB) matrix inputs. It has a very `Dense` (1024) layer before a "dropout" (random omission of features) layer set to 20% and several max-pooling layers are interwoven. The network ends at a `Dense` layer with a softmax activation.
 
 Below are the model's accuracy and loss plots:
 ![](writeup/base_model/base_accuracy_loss.png)
@@ -98,7 +98,7 @@ The LeNet5 model was constructed via the Kaggle [example](https://www.kaggle.com
 
 ![](writeup/lenet5_model/lenet5_model_architecture.png)
 
-This is a simpler model than the base, containing only two convolution layers. There are no "drouput" layers in this model but the last three dense layers titrate from 120 to 84 to 10 and finally to the output layer with a softmax activation.
+This is a simpler model than the base, containing only two convolution layers. There are no `Dropout` layers in this model but the last three dense layers titrate from 120 to 84 to 10 and finally to the output layer with a softmax activation.
 
 ![](writeup/lenet5_model/lenet5_accuracy_loss.png)
 
@@ -106,7 +106,7 @@ In comparison to the base model, the LeNet5 model trained better over the span o
 
 ![](writeup/lenet5_model/lenet5_airplane_prediction.png)
 
-"Out of the box", this model identified the airplane image mentioned above to a dog.
+"Out of the box", this model identified the airplane image mentioned above as a dog.
 
 #### LeNet5 Model with Image Augmentation
 
@@ -128,15 +128,11 @@ In spite of its poor performance (accuracy:59%), this model made the correct pre
 
 #### LeNet5 Model with Image Augmentation and Dropout
 
-This model was copied from the above and ammended with
-```
-Dropout(0.2)
-```
-preceding the `Flatten` layer.
+This model was copied from the above and ammended with `Dropout(0.2)` preceding the `Flatten` layer.
 
 ![](writeup/lenet5_model/lenet5_aug_dropout_accuracy_loss.png)
 
-Although accuracy (59%) remained similar to it predicessor, the accuracy and loss validations, depart from the training rate which is also lower than in the earlier models. This is a bit surprisong since the training set contained 153,600,000 images. When the data was initially split into training & testing sets, it was not shuffled; if the data was not well distributed, this could suggest the lack of "randomness" necessary for the `Dropout` to be of benefit.
+Although accuracy (59%) remained similar to it predicessor, the accuracy and loss validations, depart from the training rate which is also lower than in the earlier models. This is a bit surprising since the training set contained 153,600,000 images. When the data was initially split into training & testing sets, it was not shuffled; if the data was not well distributed, this could suggest the lack of "randomness" necessary for the `Dropout` to be of benefit.
 
 This table summarizes the scores collected for the three variants of LeNet5
 
@@ -208,11 +204,11 @@ Surprisingly, however, this model made the correct "rose" prediction
 
 #### VGGNet16 Model with Image Augmentation
 
-The image-augmented version of the VGGNet16 model displayed an improved training accuracy trend; although with more uncertainty. Still overfitted, but less so than its non-augmented counterpart, the validation lossdecreased substantially.
+The image-augmented version of the VGGNet16 model displayed an improved training accuracy trend; although with more uncertainty. Still overfitted, but less so than its non-augmented counterpart, the validation loss decreased substantially.
 
 ![](writeup/vggnet16/vggnet16_aug_accuracy_loss.png)
 
-The prediction, however was similar to the AlexNet + image augmentation +`Dropout`, favoring more the "tulips".
+The prediction, however was similar to the AlexNet + image augmentation + Dropout, favoring more the "tulips".
 
 ![](writeup/vggnet16/vggnet16_aug_rose_prediction.png)
 
@@ -239,7 +235,7 @@ Below is a plot of the fit times
 
 ![](writeup/model_fit_times.png)
 
-Note that the "VGGNet16 Model with Image Augmentation" is probably an anomaly due to the machine going to "sleep". In spite of this, it is clear that the most complex model, VGGNet 16, took an overwhelmingly longer time to fit than the other models.
+Note that the "VGGNet16 Model with Image Augmentation" is probably an anomaly due to the machine going to "sleep". In spite of this, it is clear that the most complex model, VGGNet 16, took an overwhelmingly longer time to fit than the other models (~8.3 hours).
 
 #### Conclusiong
 
