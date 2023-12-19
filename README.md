@@ -237,13 +237,13 @@ Below is a plot of the fit times
 
 Note that the "VGGNet16 Model with Image Augmentation" is probably an anomaly due to the machine going to "sleep". In spite of this, it is clear that the most complex model, VGGNet 16, took an overwhelmingly longer time to fit than the other models (~8.3 hours).
 
-#### Conclusiong
+#### Conclusion
 
-TODO
+This project illustrates that producing accurate and performant CNNs for image classification is not a trivial task. Architectures that are commonly available in frameworks like Keras still require careful selection and the optimization of hyperparameters. Input data is a crucial precursor, both in quality and quantity. Comptational power for larger models is necessary to reduce training time.
 
 #### Future Work
 
-TODO
+The VGGNet 16 model trained in around eight hours with marginal results for all three variants. It is necessary to compare performance of any of these models utilizing `GridSearchCV`, for example. Selecting ranges of epochs, optimizers (`Adam`, `SGD` etc.), learning rate, momentum, network weight initialization, neuron activation functions, dropout regularization, and the number of neurons in hidden layers. To reduce training time, parallelizing this process using AWS instances. 
 
 #### References
 
@@ -270,8 +270,11 @@ TODO
 
 #### Files
 
-TODO
+*  [Base Model](BaseModel.ipynb)
+*  [AlexNet](AlexNet.ipynb)
+*  [LeNet5](LeNet5.ipynb)
+*  [VGGNet16](VGGNet16.ipynb)
 
 #### Running the Examples
 
-TODO
+All of the models were created as Jupyter notebooks. They can be ran locally in Anaconda or imported into Google Colab (I mentioned earlier some limmitations due to long-running fit/training).
